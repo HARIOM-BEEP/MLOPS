@@ -1,4 +1,4 @@
-name: Student CI-CD Pipeline
+name: Student Placement ML CI-CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   test:
-    name: CI - Test Application
+    name: CI - Train and Test ML Model
     runs-on: ubuntu-latest
 
     steps:
@@ -24,12 +24,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Tests
+      - name: Train ML Model
+        run: |
+          python train.py
+
+      - name: Run Prediction
+        run: |
+          python predict.py
+
+      - name: Run Automated Tests
         run: |
           pytest
 
   deploy:
-    name: CD - Deploy Application
+    name: CD - Deploy ML Model
     needs: test
     runs-on: ubuntu-latest
 
@@ -37,6 +45,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Deploy Application
+      - name: Deploy Model
         run: |
-          echo "Application deployed successfully!"
+          echo "Student placement model deployed successfully!"
