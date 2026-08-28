@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 
 
 # Load dataset
-data = pd.read_csv("D:\Program Files\MLOPS\data\student_placement.csv")
+data = pd.read_csv("data\student_placement.csv")
 
 # Features and target
 X = data[
