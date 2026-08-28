@@ -7,13 +7,14 @@ from sklearn.metrics import accuracy_score
 
 
 # Load dataset
-data = pd.read_csv("data\student_placement.csv")
+data = pd.read_csv("data/student_placement.csv")
 
-# Features and target
+# Select features
 X = data[
     ["CGPA", "Attendance", "CodingScore", "Projects", "Internship"]
 ]
 
+# Target
 y = data["Placement"]
 
 # Train-test split
@@ -31,8 +32,9 @@ model = LogisticRegression(max_iter=1000)
 # Train model
 model.fit(X_train, y_train)
 
-# Evaluate model
+# Test model
 predictions = model.predict(X_test)
+
 accuracy = accuracy_score(y_test, predictions)
 
 print("Model trained successfully!")
